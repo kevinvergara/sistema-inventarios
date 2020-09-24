@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mysql_serve:
+    image: mysql:5.6.42
+    container_name: db_inventario
+    ports:
+      - 33077:3306
+    environment:
+      MYSQL_USER: desarrollo
+      MYSQL_PASSWORD: 123456
+      MYSQL_DATABASE: inventario3
+      MYSQL_ROOT_PASSWORD: 123456
+  web:
+    build: .
+    container_name: web_invetario
+    ports:
+      - 8080:80
+    volumes:
+      - .:/opt/data
+    links:
+      - mysql_serve
